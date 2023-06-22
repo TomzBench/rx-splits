@@ -1,0 +1,56 @@
+{
+  "name": "rx-split-react",
+  "version": "0.0.0",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/rx-split-react.umd.cjs",
+  "module": "./dist/rx-split-react.js",
+  "exports": {
+    ".": {
+      "import": "./dist/rx-split-react.js",
+      "require": "./dist/rx-split-react.umd.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "clean": "rimraf coverage dist tsconfig.lib.tsbuildinfo",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@lit-labs/react": "^1.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rx-split": "workspace:^0.0.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^7.0.23",
+    "@storybook/addon-interactions": "^7.0.23",
+    "@storybook/addon-links": "^7.0.23",
+    "@storybook/blocks": "^7.0.23",
+    "@storybook/react": "^7.0.23",
+    "@storybook/react-vite": "^7.0.23",
+    "@storybook/testing-library": "^0.0.14-next.2",
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "@vitejs/plugin-react-swc": "^3.0.0",
+    "eslint": "^8.38.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "eslint-plugin-storybook": "^0.6.12",
+    "prop-types": "^15.8.1",
+    "rimraf": "^5.0.1",
+    "storybook": "^7.0.23",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.9",
+    "vite-plugin-dts": "^2.3.0"
+  }
+}

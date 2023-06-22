@@ -3,10 +3,10 @@
 import type { Meta, StoryObj } from "@storybook/web-components";
 import { styleMap } from "lit/directives/style-map.js";
 import { html } from "lit";
-import "./Split";
+import "./RxSplit";
 
 const meta: Meta = {
-  component: "split",
+  component: "rx-split",
 };
 export default meta;
 

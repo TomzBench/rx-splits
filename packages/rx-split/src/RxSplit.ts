@@ -67,21 +67,9 @@ function grabBarReducerHorizontal(offX: number) {
 /**
  */
 @customElement("rx-split")
-export class Split extends LitElement {
+export class RxSplit extends LitElement {
   @property({ type: Boolean, reflect: true })
   vertical: boolean = false;
-
-  @property({ type: Number, reflect: true })
-  x: number = 0;
-
-  @property({ type: Number, reflect: true })
-  y: number = 0;
-
-  @property({ type: Number, reflect: true })
-  height: number = 0;
-
-  @property({ type: Number, reflect: true })
-  width: number = 0;
 
   @queryAssignedElements()
   views!: Array<HTMLElement>;
@@ -91,6 +79,10 @@ export class Split extends LitElement {
 
   _mouse$: Subject<RxMouseEvents> = new Subject();
   _stop$: Subject<void> = new Subject();
+  x: number = 0;
+  y: number = 0;
+  height: number = 0;
+  width: number = 0;
 
   /**
    * hanhdleMouseLeave

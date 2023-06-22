@@ -1,11 +1,17 @@
 {
-  "name": "rx-splits",
-  "private": true,
+  "name": "rx-split",
   "version": "0.0.0",
   "type": "module",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/rx-split.umd.cjs",
+  "module": "./dist/rx-split.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "clean": "rimraf coverage dist tsconfig.lib.tsbuildinfo",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -23,10 +29,12 @@
     "@storybook/web-components-vite": "^7.0.22",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "rimraf": "^5.0.1",
     "rxjs": "^7.8.1",
     "storybook": "^7.0.22",
     "typescript": "^5.0.2",
-    "vite": "^4.3.9"
+    "vite": "^4.3.9",
+    "vite-plugin-dts": "^2.3.0"
   },
   "peerDependencies": {
     "rxjs": "^7.8.1"
