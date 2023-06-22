@@ -176,7 +176,7 @@ export class RxSplit extends LitElement {
     const down$ = this._mouse$.asObservable().pipe(filter(isMouseDownEvent));
     const move$ = this._mouse$
       .asObservable()
-      .pipe(filter(isMouseMoveEvent), sampleTime(8));
+      .pipe(filter(isMouseMoveEvent), sampleTime(80));
     let selectorFn: (idx: number) => [number, number];
     let resizeFn: (args: Track) => void;
     if (this.vertical) {
