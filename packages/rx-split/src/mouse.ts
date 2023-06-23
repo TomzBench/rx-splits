@@ -1,5 +1,5 @@
-import { Observable, OperatorFunction } from "rxjs";
-import { filter } from "rxjs/operators";
+import { Observable, merge, OperatorFunction } from "rxjs";
+import { filter, connect, auditTime, take, skip } from "rxjs/operators";
 import { Track, Range } from "./dom";
 
 export type RX_MOUSE_EVENT_TYPES = "up" | "down" | "move";
@@ -42,6 +42,16 @@ export function isMouseDownEvent(obs: RxMouseEvents): obs is RxMouseDownEvent {
 
 export function isMouseMoveEvent(obs: RxMouseEvents): obs is RxMouseMoveEvent {
   return obs.type == "move";
+}
+
+export function throttler<T>(ms: number) {
+  return function (source: Observable<T>) {
+    return source.pipe(
+      connect((obs$) =>
+        merge(obs$.pipe(take(1)), obs$.pipe(skip(1), auditTime(ms)))
+      )
+    );
+  };
 }
 
 export function oor<T extends { position: number }>(

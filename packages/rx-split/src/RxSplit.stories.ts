@@ -28,12 +28,15 @@ const Box = ({ color: backgroundColor, height, width }: BoxProps) =>
   ></div>`;
 
 export const Primary: Story = {
-  argTypes: { vertical: { control: { type: "boolean" } } },
-  render: ({ vertical }) => {
+  argTypes: {
+    vertical: { control: { type: "boolean" } },
+    sampleTime: { control: { type: "number" } },
+  },
+  render: ({ vertical, sampleTime }) => {
     const red = Box({ color: "red", height: 200, width: 200 });
     const blue = Box({ color: "blue", height: 200, width: 200 });
     const green = Box({ color: "green", height: 200, width: 200 });
-    return html`<rx-split .vertical=${vertical}
+    return html`<rx-split sample-time=${sampleTime} .vertical=${vertical}
       >${red}${blue}${green}</rx-split
     > `;
   },

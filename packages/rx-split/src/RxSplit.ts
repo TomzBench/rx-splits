@@ -1,12 +1,5 @@
 import { Subject, merge } from "rxjs";
-import {
-  scan,
-  map,
-  sampleTime,
-  takeUntil,
-  switchMap,
-  filter,
-} from "rxjs/operators";
+import { scan, map, takeUntil, switchMap, filter } from "rxjs/operators";
 
 import { LitElement, css, html } from "lit";
 import { classMap } from "lit/directives/class-map.js";
@@ -22,6 +15,7 @@ import { Track, parseNumAttr } from "./dom";
 import {
   scanFn,
   oor,
+  throttler,
   RxMouseEvents,
   isMouseUpEvent,
   isMouseDownEvent,
@@ -70,6 +64,9 @@ function grabBarReducerHorizontal(offX: number) {
 export class RxSplit extends LitElement {
   @property({ type: Boolean, reflect: true })
   vertical: boolean = false;
+
+  @property({ type: Number, attribute: "sample-time" })
+  sampleTime: number = 50;
 
   @queryAssignedElements()
   views!: Array<HTMLElement>;
@@ -174,9 +171,7 @@ export class RxSplit extends LitElement {
     const stop$ = this._stop$.asObservable();
     const up$ = this._mouse$.asObservable().pipe(filter(isMouseUpEvent));
     const down$ = this._mouse$.asObservable().pipe(filter(isMouseDownEvent));
-    const move$ = this._mouse$
-      .asObservable()
-      .pipe(filter(isMouseMoveEvent), sampleTime(80));
+    const move$ = this._mouse$.asObservable().pipe(filter(isMouseMoveEvent));
     let selectorFn: (idx: number) => [number, number];
     let resizeFn: (args: Track) => void;
     if (this.vertical) {
@@ -206,6 +201,7 @@ export class RxSplit extends LitElement {
         switchMap(({ idx, range }) =>
           move$.pipe(
             takeUntil(merge(stop$, up$)),
+            throttler(this.sampleTime),
             map(({ x, y }) => ({
               idx,
               position: this.vertical ? y : x,
@@ -233,7 +229,10 @@ export class RxSplit extends LitElement {
   }
 
   updated(changedProperties: Map<string, any>) {
-    if (changedProperties.has("vertical")) {
+    if (
+      changedProperties.has("vertical") ||
+      changedProperties.has("sampleTime")
+    ) {
       this.handleSlotChange();
       this._stop$.next();
       this.listen();
@@ -270,7 +269,10 @@ export class RxSplit extends LitElement {
     }
     .grabBar {
       position: absolute;
-      cursor: grab;
+      cursor: row-resize;
+    }
+    .horizontal .grabBar {
+      cursor: col-resize;
     }
   `;
 }

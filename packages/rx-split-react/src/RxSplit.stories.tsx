@@ -25,9 +25,14 @@ const Box = ({ color: backgroundColor, width, height }: BoxProps) => (
 );
 
 export const Primary: Story = {
-  argTypes: { vertical: { control: { type: "boolean" } } },
-  render: ({ vertical }) => (
-    <RxSplit vertical={vertical}>
+  argTypes: {
+    vertical: {
+      control: { type: "boolean" },
+      sampleTime: { control: { type: "number" } },
+    },
+  },
+  render: ({ vertical, sampleTime }) => (
+    <RxSplit sampleTime={sampleTime} vertical={vertical}>
       <Box color="red" height={200} width={200} />
       <Box color="blue" height={200} width={200} />
       <Box color="green" height={200} width={200} />
