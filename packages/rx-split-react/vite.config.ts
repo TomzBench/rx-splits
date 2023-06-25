@@ -9,7 +9,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
       name: "RxSplits",
-      fileName: "rx-split",
+      fileName: "rx-split-react",
     },
     rollupOptions: {
       external: ["react", "rxjs"],

@@ -179,9 +179,15 @@ export class RxSplit extends LitElement {
         this.views[idx].getBoundingClientRect().height,
         this.views[idx + 1].getBoundingClientRect().height,
       ];
-      resizeFn = ({ idx, rects }) => {
-        this.views[idx].style.height = `${rects[0]}px`;
-        this.views[idx + 1].style.height = `${rects[1]}px`;
+      resizeFn = ({ idx, rects: detail }) => {
+        this.views[idx].style.height = `${detail[0]}px`;
+        this.views[idx + 1].style.height = `${detail[1]}px`;
+        const ev = new CustomEvent("rx-resize", {
+          bubbles: true,
+          composed: true,
+          detail,
+        });
+        this.dispatchEvent(ev);
         this.updateGrabBars();
       };
     } else {
@@ -189,9 +195,15 @@ export class RxSplit extends LitElement {
         this.views[idx].getBoundingClientRect().width,
         this.views[idx + 1].getBoundingClientRect().width,
       ];
-      resizeFn = ({ idx, rects }) => {
-        this.views[idx].style.width = `${rects[0]}px`;
-        this.views[idx + 1].style.width = `${rects[1]}px`;
+      resizeFn = ({ idx, rects: detail }) => {
+        this.views[idx].style.width = `${detail[0]}px`;
+        this.views[idx + 1].style.width = `${detail[1]}px`;
+        const ev = new CustomEvent("rx-resize", {
+          bubbles: true,
+          composed: true,
+          detail,
+        });
+        this.dispatchEvent(ev);
         this.updateGrabBars();
       };
     }

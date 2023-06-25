@@ -1,6 +1,6 @@
 {
   "name": "rx-split-react",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "type": "module",
   "types": "./dist/index.d.ts",
   "files": [
@@ -8,12 +8,6 @@
   ],
   "main": "./dist/rx-split-react.umd.cjs",
   "module": "./dist/rx-split-react.js",
-  "exports": {
-    ".": {
-      "import": "./dist/rx-split-react.js",
-      "require": "./dist/rx-split-react.umd.cjs"
-    }
-  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

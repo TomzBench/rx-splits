@@ -1,5 +1,5 @@
 import React from "react";
-import { createComponent } from "@lit-labs/react";
+import { EventName, createComponent } from "@lit-labs/react";
 import { RxSplit as RxSplitLit } from "rx-split";
 
 export const RxSplit = createComponent({
@@ -7,7 +7,6 @@ export const RxSplit = createComponent({
   elementClass: RxSplitLit,
   react: React,
   events: {
-    //onactivate: "activate",
-    //onchange: "change",
+    "onrx-resize": "rx-resize" as EventName<CustomEvent<[number, number]>>,
   },
 });
